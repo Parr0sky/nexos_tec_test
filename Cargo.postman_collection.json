@@ -1,0 +1,231 @@
+{
+	"info": {
+		"_postman_id": "1cf948c0-8cd9-4077-a065-90d1759c7553",
+		"name": "Cargo",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "get cargo",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:8080/cargo/all",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"cargo",
+						"all"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "addMerc",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"url": {
+					"raw": "localhost:8080/mercs/add?nombre=llanta r24&cantidad=15&fecha=2021-08-08&usuario_creacion=6",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"mercs",
+						"add"
+					],
+					"query": [
+						{
+							"key": "nombre",
+							"value": "llanta r24"
+						},
+						{
+							"key": "cantidad",
+							"value": "15"
+						},
+						{
+							"key": "fecha",
+							"value": "2021-08-08"
+						},
+						{
+							"key": "usuario_mod",
+							"value": "5?nombre=llantas r13",
+							"disabled": true
+						},
+						{
+							"key": "cantidad",
+							"value": "22",
+							"disabled": true
+						},
+						{
+							"key": "fecha",
+							"value": "2021-08-07",
+							"disabled": true
+						},
+						{
+							"key": "usuario_creacion",
+							"value": "6"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "deleteMerc",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "localhost:8080/mercs/delete/:id?idUser=6",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"mercs",
+						"delete",
+						":id"
+					],
+					"query": [
+						{
+							"key": "idUser",
+							"value": "6"
+						}
+					],
+					"variable": [
+						{
+							"key": "id",
+							"value": "6"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "editMerc",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"url": {
+					"raw": "localhost:8080/mercs/edit/:id?nombre=llanta r15&cantidad=15&fecha=2021-08-07&usuario_mod=5",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"mercs",
+						"edit",
+						":id"
+					],
+					"query": [
+						{
+							"key": "nombre",
+							"value": "llanta r15"
+						},
+						{
+							"key": "cantidad",
+							"value": "15"
+						},
+						{
+							"key": "fecha",
+							"value": "2021-08-07"
+						},
+						{
+							"key": "usuario_mod",
+							"value": "5"
+						}
+					],
+					"variable": [
+						{
+							"key": "id",
+							"value": "9"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "addUser",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"url": {
+					"raw": "localhost:8080/user/add?nombre=UserTest2&edad=25&cargo=2&fecha_ingreso=2021-08-12",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"user",
+						"add"
+					],
+					"query": [
+						{
+							"key": "nombre",
+							"value": "UserTest2"
+						},
+						{
+							"key": "edad",
+							"value": "25"
+						},
+						{
+							"key": "cargo",
+							"value": "2"
+						},
+						{
+							"key": "fecha_ingreso",
+							"value": "2021-08-12"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "getall",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:8080/user/all",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"user",
+						"all"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "allMercs",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:8080/mercs/all",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"mercs",
+						"all"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
