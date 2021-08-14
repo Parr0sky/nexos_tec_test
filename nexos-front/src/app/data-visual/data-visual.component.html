@@ -1,0 +1,155 @@
+<fd-toolbar>
+
+  <fd-toolbar-spacer>
+
+  </fd-toolbar-spacer>
+  <span>
+                Usuario:
+                <fd-select placeholder="Seleccione usuario" [(value)]="userSelected">
+                  <fd-option *ngFor="let option of options" [value]="option">{{option['nombre']}}</fd-option>
+                </fd-select>
+            </span>
+  <fd-input-group
+    glyph="decline"
+    placeholder="Search"
+    [compact]="true"
+    [disabled]="false"
+    [button]="true"
+    [(ngModel)]="searchTerm"
+    (ngModelChange)="searchInputChanged($event)"
+    (addOnButtonClicked)="resetSearch()"
+  >
+  </fd-input-group>
+  <button fd-toolbar-item
+          fd-button
+          label="Crear mercancia"
+          (click)="openDialog(newItemDialog,null)"
+          [compact]="true"
+          fdType="transparent"
+          [disabled]="userSelected==undefined"
+          glyph="add"></button>
+</fd-toolbar>
+<fd-busy-indicator [loading]="loading" [block]="true" size="l">
+  <table fd-table>
+    <thead fd-table-header>
+    <tr fd-table-row>
+      <th fd-table-cell>ID mercancía</th>
+      <th fd-table-cell>Nombre</th>
+      <th fd-table-cell>Cantidad</th>
+      <th fd-table-cell>Fecha Ingreso</th>
+      <th fd-table-cell>Usuario Creación</th>
+      <th fd-table-cell>Opcion</th>
+    </tr>
+    </thead>
+    <tbody fd-table-body>
+    <tr *ngFor="let row of displayedRows" fd-table-row>
+      <td fd-table-cell>{{ row.id }}</td>
+      <td fd-table-cell>{{ row.nombre }}</td>
+      <td fd-table-cell>{{ row.cantidad }}</td>
+      <td fd-table-cell>{{ row.fechaIngreso }}</td>
+      <td fd-table-cell>{{ row.usuarioCreacion?.nombre }}</td>
+      <td fd-table-cell>
+        <button fd-toolbar-item
+                fd-button
+                label="Editar mercancia"
+                (click)="openDialog(editItemDialog,row.id)"
+                [compact]="true"
+                fdType="transparent"
+                [disabled]="userSelected==undefined"
+                glyph="edit"></button>
+        <button fd-toolbar-item
+                fd-button
+                label="Borrar mercancia"
+                (click)="openDialog(editItemDialog,row.id)"
+                [compact]="true"
+                fdType="transparent"
+                [disabled]="userSelected==undefined"
+                glyph="delete"></button>
+      </td>
+    </tr>
+
+    <tr *ngIf="!displayedRows || !displayedRows.length" fd-table-row>
+      <td fd-table-cell [noData]="true">
+        No Results Found!
+      </td>
+    </tr>
+    </tbody>
+  </table>
+</fd-busy-indicator>
+
+<ng-template let-dialog let-dialogConfig="dialogConfig" #newItemDialog>
+  <fd-dialog [dialogConfig]="dialogConfig" [dialogRef]="dialog">
+    <fd-dialog-header>
+
+      <h1 fd-title>Mercancia nueva</h1>
+      <button fd-dialog-close-button (click)="dialog.dismiss('Close button')"></button>
+    </fd-dialog-header>
+    <fd-dialog-body>
+      <form [formGroup]="createForm">
+        <div fd-form-set>
+          <div fd-form-item>
+            <label fd-form-label for="input-1">nombre</label>
+            <input fd-form-control formControlName="nameInput" type="text" id="input-1" autocomplete="off"/>
+          </div>
+          <div fd-form-item>
+            <label fd-form-label for="input-2">cantidad</label>
+            <input fd-form-control formControlName="amountInput" type="text" id="input-2" autocomplete="off"/>
+          </div>
+        </div>
+      </form>
+    </fd-dialog-body>
+    <fd-dialog-footer>
+      <fd-button-bar
+        fdType="emphasized"
+        label="Save"
+        type="submit"
+        (click)="dialog.close('Save')">
+
+      </fd-button-bar>
+      <fd-button-bar
+        fd-initial-focus
+        label="Cancel"
+        (click)="dialog.dismiss('Cancel')">
+      </fd-button-bar>
+    </fd-dialog-footer>
+  </fd-dialog>
+</ng-template>
+
+
+<ng-template let-dialog2 let-dialogConfig="dialogConfig" #editItemDialog>
+  <fd-dialog [dialogConfig]="dialogConfig" [dialogRef]="dialog2">
+    <fd-dialog-header>
+
+      <h1 fd-title>Editar Mercancia</h1>
+      <button fd-dialog-close-button (click)="dialog2.dismiss('Close button')"></button>
+    </fd-dialog-header>
+    <fd-dialog-body>
+      <form [formGroup]="editForm">
+        <div fd-form-set>
+          <div fd-form-item>
+            <label fd-form-label for="input-2-1">nombre</label>
+            <input fd-form-control formControlName="nameInput" type="text" id="input-2-1" autocomplete="off"/>
+          </div>
+          <div fd-form-item>
+            <label fd-form-label for="input-2-2">cantidad</label>
+            <input fd-form-control formControlName="amountInput" type="text" id="input-2-2" autocomplete="off"/>
+          </div>
+        </div>
+      </form>
+    </fd-dialog-body>
+    <fd-dialog-footer>
+      <fd-button-bar
+        fdType="emphasized"
+        label="Save"
+        type="submit"
+        (click)="dialog2.close('edit')">
+
+      </fd-button-bar>
+      <fd-button-bar
+        fd-initial-focus
+        label="Cancel"
+        (click)="dialog2.dismiss('Cancel')">
+      </fd-button-bar>
+    </fd-dialog-footer>
+  </fd-dialog>
+</ng-template>

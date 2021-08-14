@@ -3,12 +3,10 @@ package com.example.nexos.controllers;
 import com.example.nexos.models.Mercancia;
 import com.example.nexos.models.Modificacion;
 import com.example.nexos.models.Usuario;
-import com.example.nexos.repositories.CargoRepositorio;
 import com.example.nexos.repositories.MercanciaRepositorio;
 import com.example.nexos.repositories.ModificacionRepositorio;
 import com.example.nexos.repositories.UsuarioRepositorio;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.client.ClientHttpResponse;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
@@ -32,12 +30,13 @@ public class MercanciaController {
         n.setFechaIngreso(fecha);
         n.setNombre(nombre);
         n.setUsuarioCreacion(usuarioRepositorio.findById(usuario_creacion).orElse(null));
-        Date sqlDate = new java.sql.Date(new java.util.Date().getTime());
+        Date sqlDate = new java.sql.Date(new java.util.Date().getTime()+(24*60*60*1000));
         if(fecha.before(sqlDate)){
             mercanciaRepositorio.save(n);
-            return "Guardado";
+            return "{\"error\":false, \"mensaje\":\"guardado\"}";
         }
         else{
+
             return "Error en fecha";
         }
     }
